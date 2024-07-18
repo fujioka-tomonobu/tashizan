@@ -84,7 +84,7 @@ var event = new function(){
 	 */
 	this.easy = function(){
 		event.startMusic();
-		一問時間 = 20 * 1000;
+		一問時間 = 25 * 1000;
 		足し算桁数 = 2;
 		event.countDown();
 	};
@@ -94,7 +94,7 @@ var event = new function(){
 	 */
 	this.normal = function(){
 		event.startMusic();
-		一問時間 = 14 * 1000;
+		一問時間 = 16 * 1000;
 		足し算桁数 = 2;
 		event.countDown();
 	};
