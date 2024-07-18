@@ -104,7 +104,7 @@ var event = new function(){
 	 */
 	this.hard = function(){
 		event.startMusic();
-		一問時間 = 5 * 1000;
+		一問時間 = 7 * 1000;
 		足し算桁数 = 2;
 		event.countDown();
 	};
