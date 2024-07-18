@@ -54,6 +54,8 @@ var event = new function(){
 	var 何問目 = 0;
 	var 一歩距離 = 0;
 	
+	var 足し算桁数 = 1;
+	
 	var カービ移動回数 = 0;
 	var デデデ移動回数 = 0;
 	
@@ -82,7 +84,8 @@ var event = new function(){
 	 */
 	this.easy = function(){
 		event.startMusic();
-		一問時間 = 10 * 1000;
+		一問時間 = 8 * 1000;
+		足し算桁数 = 1;
 		event.countDown();
 	};
 	
@@ -91,7 +94,8 @@ var event = new function(){
 	 */
 	this.normal = function(){
 		event.startMusic();
-		一問時間 = 6 * 1000;
+		一問時間 = 5 * 1000;
+		足し算桁数 = 1;
 		event.countDown();
 	};
 
@@ -100,7 +104,8 @@ var event = new function(){
 	 */
 	this.hard = function(){
 		event.startMusic();
-		一問時間 = 3 * 1000;
+		一問時間 = 5 * 1000;
+		足し算桁数 = 2;
 		event.countDown();
 	};
 	
@@ -109,7 +114,8 @@ var event = new function(){
 	 */
 	this.veryhard = function(){
 		event.startMusic();
-		一問時間 = 1.2 * 1000;
+		一問時間 = 2 * 1000;
+		足し算桁数 = 2;
 		event.countDown();
 	};
 	
@@ -161,8 +167,8 @@ var event = new function(){
 
 		何問目++;
 		
-		var num1 = Math.floor(Math.random() * (10));
-		var num2 = Math.floor(Math.random() * (10));
+		var num1 = Math.floor(Math.random() * (10 ** 足し算桁数));
+		var num2 = Math.floor(Math.random() * (10 ** 足し算桁数));
 		var answer = num1 + num2;
 		
 		$('#game-text').html(num1 + " ＋ " + num2);
