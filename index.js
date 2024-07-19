@@ -49,7 +49,6 @@ var event = new function(){
 	var 答え表示中 = 2;
 	
 	// 変数
-	var ステータス = 0;
 	var 一問時間 = 0;
 	var 何問目 = 0;
 	var 一歩距離 = 0;
@@ -163,7 +162,6 @@ var event = new function(){
 	this.takeMondai = function() {
 		$('#next').show();
 		$('#answer').hide();
-		ステータス = 回答中;
 
 		何問目++;
 		
@@ -180,49 +178,48 @@ var event = new function(){
 	 * つぎへ
 	 */
 	this.next = function(){
-		switch(ステータス) {
-			case 回答中:
-				$('#game-text').hide();
-				$('#answer').show();
-				ステータス = 答え表示中;
-				break;
-			case 答え表示中:
-				$('#game-text').show();
-				$('#answer').hide();
-				event.moveKirby();
-				
-				ステータス = 回答中;
-				
-				// カービゴール
-				if(何問目 >= 問題数) {
-					
-					// 時間計算
-					var 終了時間 = new Date();
-					var TimeDefference = 終了時間.getTime() - 開始時間.getTime()
 
-					var Hour = TimeDefference / (1000 * 60 * 60);    
-					//「時間」の部分を「Hour」に代入
-					var Minute = (Hour - Math.floor(Hour)) * 60;
-					//「分」の部分をMinuteに代入
-					var Second = (Minute - Math.floor(Minute)) * 60;
-					//TimeDefference = (('00' + Math.floor(Hour)).slice(-2) + ':' + ('00' + Math.floor(Minute)).slice(-2) + ':' + ('00' + Math.floor(Second)).slice(-2));
-					TimeDefference = (('00' + Math.floor(Minute)).slice(-2) + ':' + ('00' + Math.floor(Second)).slice(-2));
-					
-					$('.time').html(TimeDefference);
-	
-					clearInterval(dededeAnimeId);
-					
-					if(カービ移動回数 > デデデ移動回数) {
-						event.win();
-					}else{
-						event.lose();
-					}
-					return;
-				}
+		$('#game-text').hide();
+		$('#answer').show();
+		$('#next').hide();
+		
+		// ０．５秒で自動的に次の問題へ
+		setTimeout(function(){
+			
+			$('#game-text').show();
+			$('#answer').hide();
+			$('#next').show();
+			event.moveKirby();
+			
+			// カービゴール
+			if(何問目 >= 問題数) {
 				
-				event.takeMondai();
-				break;
-		}
+				// 時間計算
+				var 終了時間 = new Date();
+				var TimeDefference = 終了時間.getTime() - 開始時間.getTime()
+
+				var Hour = TimeDefference / (1000 * 60 * 60);    
+				//「時間」の部分を「Hour」に代入
+				var Minute = (Hour - Math.floor(Hour)) * 60;
+				//「分」の部分をMinuteに代入
+				var Second = (Minute - Math.floor(Minute)) * 60;
+				//TimeDefference = (('00' + Math.floor(Hour)).slice(-2) + ':' + ('00' + Math.floor(Minute)).slice(-2) + ':' + ('00' + Math.floor(Second)).slice(-2));
+				TimeDefference = (('00' + Math.floor(Minute)).slice(-2) + ':' + ('00' + Math.floor(Second)).slice(-2));
+				
+				$('.time').html(TimeDefference);
+
+				clearInterval(dededeAnimeId);
+				
+				if(カービ移動回数 > デデデ移動回数) {
+					event.win();
+				}else{
+					event.lose();
+				}
+				return;
+			}
+			
+			event.takeMondai();
+		}, 500);
 	};
 	
 	
