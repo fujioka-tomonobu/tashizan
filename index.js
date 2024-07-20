@@ -244,6 +244,12 @@ var event = new function(){
 				clearInterval(dededeAnimeId);
 			}
 			$('#race-dedede').css('left', デデデ移動回数 * 一歩距離);
+			
+			// スローカーブースト
+			if(デデデ移動回数 < カービ移動回数 - 2) {
+				デデデ移動回数++;
+				$('#race-dedede').css('left', デデデ移動回数 * 一歩距離);
+			}
 		},一問時間);
 	};
 	
