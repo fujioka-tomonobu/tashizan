@@ -113,7 +113,7 @@ var event = new function(){
 	 */
 	this.veryhard = function(){
 		event.startMusic();
-		一問時間 = 1.8 * 1000;
+		一問時間 = 2 * 1000;
 		足し算桁数 = 2;
 		event.countDown();
 	};
