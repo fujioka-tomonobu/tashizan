@@ -83,8 +83,8 @@ var event = new function(){
 	 */
 	this.easy = function(){
 		event.startMusic();
-		一問時間 = 20 * 1000;
-		足し算桁数 = 2;
+		一問時間 = 5 * 1000;
+		足し算桁数 = 1;
 		event.countDown();
 	};
 	
@@ -93,7 +93,7 @@ var event = new function(){
 	 */
 	this.normal = function(){
 		event.startMusic();
-		一問時間 = 14 * 1000;
+		一問時間 = 15 * 1000;
 		足し算桁数 = 2;
 		event.countDown();
 	};
@@ -113,7 +113,7 @@ var event = new function(){
 	 */
 	this.veryhard = function(){
 		event.startMusic();
-		一問時間 = 2 * 1000;
+		一問時間 = 1.7 * 1000;
 		足し算桁数 = 2;
 		event.countDown();
 	};
