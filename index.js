@@ -55,6 +55,8 @@ var event = new function(){
 	
 	var 足し算桁数 = 1;
 	
+	var 二桁目の桁数 = 1;
+	
 	var カービ移動回数 = 0;
 	var デデデ移動回数 = 0;
 	
@@ -85,6 +87,7 @@ var event = new function(){
 		event.startMusic();
 		一問時間 = 5 * 1000;
 		足し算桁数 = 1;
+		二桁目の桁数 = 1;
 		event.countDown();
 	};
 	
@@ -95,6 +98,7 @@ var event = new function(){
 		event.startMusic();
 		一問時間 = 15 * 1000;
 		足し算桁数 = 2;
+		二桁目の桁数 = 1;
 		event.countDown();
 	};
 
@@ -105,6 +109,7 @@ var event = new function(){
 		event.startMusic();
 		一問時間 = 5 * 1000;
 		足し算桁数 = 2;
+		二桁目の桁数 = 2;
 		event.countDown();
 	};
 	
@@ -115,6 +120,7 @@ var event = new function(){
 		event.startMusic();
 		一問時間 = 1.7 * 1000;
 		足し算桁数 = 2;
+		二桁目の桁数 = 2;
 		event.countDown();
 	};
 	
@@ -167,6 +173,13 @@ var event = new function(){
 		
 		var num1 = Math.floor(Math.random() * (10 ** 足し算桁数));
 		var num2 = Math.floor(Math.random() * (10 ** 足し算桁数));
+		
+		if(足し算桁数 == 2) {
+			if(二桁目の桁数 == 1) {
+				num2 =  Math.floor((num2+1) / 10);
+			}
+		}
+
 		var answer = num1 + num2;
 		
 		$('#game-text').html(num1 + " ＋ " + num2);
