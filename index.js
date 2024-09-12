@@ -176,7 +176,7 @@ var event = new function(){
 		
 		if(足し算桁数 == 2) {
 			if(二桁目の桁数 == 1) {
-				num2 =  Math.floor((num2+1) / 10);
+				num2 =  Math.floor(((num2+1) / 10)+1);
 			}
 		}
 
