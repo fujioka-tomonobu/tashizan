@@ -53,9 +53,8 @@ var event = new function(){
 	var 何問目 = 0;
 	var 一歩距離 = 0;
 	
-	var 足し算桁数 = 1;
-	
-	var 二桁目の桁数 = 1;
+	var たし算_第一項範囲;
+	var たし算_第二項範囲;
 	
 	var カービ移動回数 = 0;
 	var デデデ移動回数 = 0;
@@ -85,9 +84,11 @@ var event = new function(){
 	 */
 	this.easy = function(){
 		event.startMusic();
-		一問時間 = 5 * 1000;
-		足し算桁数 = 1;
-		二桁目の桁数 = 1;
+		一問時間 = 3 * 1000;
+		
+		たし算_第一項範囲 = [1, 9];
+		たし算_第二項範囲 = [1, 9];
+		
 		event.countDown();
 	};
 	
@@ -96,9 +97,11 @@ var event = new function(){
 	 */
 	this.normal = function(){
 		event.startMusic();
-		一問時間 = 15 * 1000;
-		足し算桁数 = 2;
-		二桁目の桁数 = 1;
+		一問時間 = 7 * 1000;
+		
+		たし算_第一項範囲 = [10, 80];
+		たし算_第二項範囲 = [1, 9];
+		
 		event.countDown();
 	};
 
@@ -107,9 +110,11 @@ var event = new function(){
 	 */
 	this.hard = function(){
 		event.startMusic();
-		一問時間 = 5 * 1000;
-		足し算桁数 = 2;
-		二桁目の桁数 = 2;
+		一問時間 = 7 * 1000;
+		
+		たし算_第一項範囲 = [10, 99];
+		たし算_第二項範囲 = [1, 99];
+		
 		event.countDown();
 	};
 	
@@ -118,9 +123,11 @@ var event = new function(){
 	 */
 	this.veryhard = function(){
 		event.startMusic();
-		一問時間 = 1.7 * 1000;
-		足し算桁数 = 2;
-		二桁目の桁数 = 2;
+		一問時間 = 2 * 1000;
+		
+		たし算_第一項範囲 = [10, 99];
+		たし算_第二項範囲 = [10, 99];
+		
 		event.countDown();
 	};
 	
@@ -171,15 +178,9 @@ var event = new function(){
 
 		何問目++;
 		
-		var num1 = Math.floor(Math.random() * (10 ** 足し算桁数));
-		var num2 = Math.floor(Math.random() * (10 ** 足し算桁数));
+		var num1 = Math.floor(Math.random() * (たし算_第一項範囲[1] - たし算_第一項範囲[0])) + たし算_第一項範囲[0];
+		var num2 = Math.floor(Math.random() * (たし算_第二項範囲[1] - たし算_第二項範囲[0])) + たし算_第二項範囲[0];
 		
-		if(足し算桁数 == 2) {
-			if(二桁目の桁数 == 1) {
-				num2 =  Math.floor(((num2+1) / 10)+1);
-			}
-		}
-
 		var answer = num1 + num2;
 		
 		$('#game-text').html(num1 + " ＋ " + num2);
@@ -196,7 +197,7 @@ var event = new function(){
 		$('#answer').show();
 		$('#next').hide();
 		
-		// ０．５秒で自動的に次の問題へ
+	// ０．５秒で自動的に次の問題へ
 		setTimeout(function(){
 			
 			$('#game-text').show();
