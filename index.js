@@ -242,7 +242,7 @@ var event = new function(){
 			デデデ移動回数++;
 			if(デデデ移動回数 >= 問題数) {
 				clearInterval(dededeAnimeId);
-				event.lose();
+//				event.lose();
 				return;
 			}
 			$('#race-dedede').css('left', デデデ移動回数 * 一歩距離);
