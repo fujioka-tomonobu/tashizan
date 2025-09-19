@@ -197,28 +197,31 @@ var event = new function(){
 		$('#answer').show();
 		$('#next').hide();
 		
+		// カービゴール
+		if(何問目 >= 問題数) {
+
+			clearInterval(dededeAnimeId);
+			
+			if(カービ移動回数 > デデデ移動回数) {
+				event.win();
+			}else{
+				event.lose();
+			}
+			return;
+		}
+		
+		// カービィ移動
+		event.moveKirby();
+		
 		// ０．５秒で自動的に次の問題へ
 		setTimeout(function(){
 			
 			$('#game-text').show();
 			$('#answer').hide();
 			$('#next').show();
-			event.moveKirby();
-			
-			// カービゴール
-			if(何問目 >= 問題数) {
-
-				clearInterval(dededeAnimeId);
-				
-				if(カービ移動回数 > デデデ移動回数) {
-					event.win();
-				}else{
-					event.lose();
-				}
-				return;
-			}
 			
 			event.takeMondai();
+			
 		}, 500);
 	};
 	
@@ -227,8 +230,9 @@ var event = new function(){
 	 * カービィ前へ
 	 */
 	this.moveKirby = function(){
+	
+		event.moveTargetNext($('#race-kirby'), カービ移動回数, 一歩距離);
 		カービ移動回数++;
-		$('#race-kirby').css('left', カービ移動回数 * 一歩距離);
 	};
 	
 	// デデデアニメのID（時間数以外でクリアするため）
@@ -239,20 +243,44 @@ var event = new function(){
 	this.runDedede = function(){
 		
 		dededeAnimeId = setInterval(function(){
-			デデデ移動回数++;
+			
 			if(デデデ移動回数 >= 問題数) {
 				clearInterval(dededeAnimeId);
-//				event.lose();
 				return;
 			}
-			$('#race-dedede').css('left', デデデ移動回数 * 一歩距離);
 			
-			// スローカーブースト
-			if(デデデ移動回数 < カービ移動回数 - 2) {
+			if(デデデ移動回数 >= カービ移動回数 - 3) {
+				// 通常移動
+				event.moveTargetNext($('#race-dedede'), デデデ移動回数, 一歩距離);
 				デデデ移動回数++;
-				$('#race-dedede').css('left', デデデ移動回数 * 一歩距離);
+			} else {
+				// スローカーブースト
+				event.moveTargetNext($('#race-dedede'), デデデ移動回数, 一歩距離 * 2);
+				デデデ移動回数++;
+				デデデ移動回数++;
 			}
 		},一問時間);
+	};
+	
+	/**
+	 * 対象を移動させる
+	 */
+	this.moveTargetNext = function(target, 移動回数, 進む距離){
+		
+		var cnt = 1;
+		var moveAnimeId = setInterval(function(){
+			
+			var position = (移動回数 * 一歩距離) + (進む距離 / 50) * cnt;
+			target.css('left', position);
+			
+			if(cnt >= 50) {
+				clearInterval(moveAnimeId);
+				return;
+			}
+			
+			cnt++;
+			
+		}, 10);
 	};
 	
 	
